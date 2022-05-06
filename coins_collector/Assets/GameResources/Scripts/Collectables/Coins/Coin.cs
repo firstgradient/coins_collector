@@ -9,5 +9,6 @@ public class Coin : BaseCollectable
     protected override void Collected()
     {
         BasicEventManager.PublishEvent(ScoreEvents.ADD_SCORE, new ScoreEvents.AddScoreEventArgs(_score));
+        BasicEventManager.PublishEvent(CoinsEvents.COIN_COLLECTED, null);
     }
 }

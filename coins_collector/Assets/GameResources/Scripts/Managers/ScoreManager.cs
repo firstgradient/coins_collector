@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using BasicEvents;
 
@@ -19,6 +17,7 @@ public class ScoreManager : MonoBehaviour
         BasicEventManager.StopListening(ScoreEvents.ADD_SCORE, OnAddScoreEvent);
     }
 
+    #region EventsHandlers
     private void OnAddScoreEvent(BasicEventArgs eventArgs)
     {
         ScoreEvents.AddScoreEventArgs e = (ScoreEvents.AddScoreEventArgs)eventArgs;
@@ -26,4 +25,5 @@ public class ScoreManager : MonoBehaviour
         _score += e.Score;
         Debug.Log($"Current Score {_score}");
     }
+    #endregion
 }
