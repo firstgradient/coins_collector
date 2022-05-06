@@ -11,7 +11,7 @@ public class Coin : BaseCollectable
 
     protected override void Collected()
     {
-        BasicEventManager.PublishEvent(CoinsEvents.COIN_COLLECTED, null);
+        BasicEventManager.PublishEvent(CoinsEvents.COIN_COLLECTED, new CoinsEvents.CoinCollectedEventArgs(_score));
         BasicEventManager.PublishEvent(TimerEvents.ADD_REMAINING_TIME, new TimerEvents.AddRemainingTimeEventArgs(_timeBonus));
     }
 }

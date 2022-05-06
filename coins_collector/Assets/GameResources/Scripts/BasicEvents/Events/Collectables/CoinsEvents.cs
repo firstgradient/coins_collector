@@ -9,7 +9,12 @@ namespace BasicEvents {
 
         public class CoinCollectedEventArgs : BasicEventArgs
         {
+            public int Score { get; private set; }
 
+            public CoinCollectedEventArgs(int score)
+            {
+                Score = score;
+            }
         }
     }
 }

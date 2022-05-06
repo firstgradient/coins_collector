@@ -26,10 +26,12 @@ public class ScoreManager : MonoBehaviour
 
     private void OnCoinCollected(BasicEventArgs eventArgs)
     {
-        _currentScore += 1;
+        CoinsEvents.CoinCollectedEventArgs e = (CoinsEvents.CoinCollectedEventArgs)eventArgs;
+
+        _currentScore += e.Score;
         BasicEventManager.PublishEvent(UIEvents.SET_CURRENT_SCORE, new UIEvents.SetCurrentScoreEventArgs(_currentScore));
 
-        if (_currentScore == _scoreGoal)
+        if (_currentScore >= _scoreGoal)
         {
             BasicEventManager.PublishEvent(GameLogicEvents.WIN, null);
         }
