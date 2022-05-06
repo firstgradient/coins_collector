@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class CameraResolution : MonoBehaviour
 {
-    void Update()
+    void Start()
     {
         float targetaspect = 1920f / 1080f;
         float windowaspect = (float)Screen.width / (float)Screen.height;
