@@ -3,27 +3,47 @@ using BasicEvents;
 
 public class ScoreManager : MonoBehaviour
 {
-    private int _score = 0;
+    private int _scoreGoal = 0;
+
+    private int _currentScore = 0;
 
     private void Awake()
     {
-        _score = 0;
+        _currentScore = 0;
 
-        BasicEventManager.StartListening(ScoreEvents.ADD_SCORE, OnAddScoreEvent);
+        BasicEventManager.StartListening(CoinsEvents.COIN_COLLECTED, OnCoinCollected);
+        BasicEventManager.StartListening(GameLogicEvents.GAME_RULES_SENDED, OnGameRulesSended);
     }
 
     private void OnDestroy()
     {
-        BasicEventManager.StopListening(ScoreEvents.ADD_SCORE, OnAddScoreEvent);
+        BasicEventManager.StopListening(CoinsEvents.COIN_COLLECTED, OnCoinCollected);
+        BasicEventManager.StopListening(GameLogicEvents.GAME_RULES_SENDED, OnGameRulesSended);
     }
 
     #region EventsHandlers
-    private void OnAddScoreEvent(BasicEventArgs eventArgs)
-    {
-        ScoreEvents.AddScoreEventArgs e = (ScoreEvents.AddScoreEventArgs)eventArgs;
 
-        _score += e.Score;
-        Debug.Log($"Current Score {_score}");
+
+    private void OnCoinCollected(BasicEventArgs eventArgs)
+    {
+        _currentScore += 1;
+        BasicEventManager.PublishEvent(UIEvents.SET_CURRENT_SCORE, new UIEvents.SetCurrentScoreEventArgs(_currentScore));
+
+        if (_currentScore == _scoreGoal)
+        {
+            BasicEventManager.PublishEvent(GameLogicEvents.WIN, null);
+        }
+    }
+
+    private void OnGameRulesSended(BasicEventArgs eventArgs)
+    {
+        GameLogicEvents.GameRulesSendedEventArgs e = (GameLogicEvents.GameRulesSendedEventArgs)eventArgs;
+
+        _scoreGoal = e.GameRules.ScoreGoal;
+        _currentScore = 0;
+
+        BasicEventManager.PublishEvent(UIEvents.SET_CURRENT_SCORE, new UIEvents.SetCurrentScoreEventArgs(_currentScore));
+        BasicEventManager.PublishEvent(UIEvents.SET_GOAL, new UIEvents.SetGoalEventArgs(_scoreGoal));
     }
     #endregion
 }
