@@ -112,3 +112,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _score: 1
   _timeBonus: 5
+  _collectedEffect: {fileID: 172158084793691832, guid: d1fab6e7caa65d348a565bd6279bd502, type: 3}
