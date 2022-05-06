@@ -14,6 +14,8 @@ public class CoinsSpawnController : MonoBehaviour
     private void Awake()
     {
         BasicEventManager.StartListening(CoinsEvents.COIN_COLLECTED, OnCoinCollected);
+        BasicEventManager.StartListening(GameLogicEvents.GAME_OVER, OnGameOver);
+        BasicEventManager.StartListening(GameLogicEvents.WIN, OnGameOver);
 
         foreach (Transform child in SpawnPointsHolder.transform)
         {
@@ -26,6 +28,9 @@ public class CoinsSpawnController : MonoBehaviour
     private void OnDestroy()
     {
         BasicEventManager.StopListening(CoinsEvents.COIN_COLLECTED, OnCoinCollected);
+        BasicEventManager.StopListening(GameLogicEvents.GAME_OVER, OnGameOver);
+        BasicEventManager.StopListening(GameLogicEvents.WIN, OnGameOver);
+
     }
 
     private void SpawnCoin(bool fullRange)
@@ -60,6 +65,16 @@ public class CoinsSpawnController : MonoBehaviour
     private void OnCoinCollected(BasicEventArgs eventArgs)
     {
         SpawnCoin(false);
+    }
+
+    private void OnGameOver(BasicEventArgs eventArgs)
+    {
+
+    }
+
+    private void OnWin(BasicEventArgs eventArgs)
+    {
+
     }
 
     #endregion

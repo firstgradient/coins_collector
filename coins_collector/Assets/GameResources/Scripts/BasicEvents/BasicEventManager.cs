@@ -3,11 +3,29 @@ using UnityEngine.Events;
 
 namespace BasicEvents
 {
-    public class BasicEventArgs { }
+    public class BasicEventArgs {
+
+    }
 
     public static class BasicEventManager
     {
-        private class BasicEvent : UnityEvent<BasicEventArgs> { }
+        private class BasicEvent : UnityEvent<BasicEventArgs>
+        {
+            private int _nonPersistantListeners = 0;
+            public int NonPersistantListeners => _nonPersistantListeners;
+
+            public void AddNonPersistantListener(UnityAction<BasicEventArgs> action)
+            {
+                AddListener(action);
+                _nonPersistantListeners++;
+            }
+
+            public void RemoveNonPersistantListener(UnityAction<BasicEventArgs> action)
+            {
+                RemoveListener(action);
+                _nonPersistantListeners--;
+            }
+        }
 
         private static Dictionary<string, BasicEvent> events = new Dictionary<string, BasicEvent>();
 
@@ -15,12 +33,12 @@ namespace BasicEvents
         {
             if (events.ContainsKey(eventName))
             {
-                events[eventName].AddListener(action);
+                events[eventName].AddNonPersistantListener(action);
             }
             else
             {
                 BasicEvent newEventInfo = new BasicEvent();
-                newEventInfo.AddListener(action);
+                newEventInfo.AddNonPersistantListener(action);
                 events.Add(eventName, newEventInfo);
             }
         }
@@ -32,8 +50,9 @@ namespace BasicEvents
                 return;
             }
 
-            events[eventName].RemoveListener(action);
-            if (events[eventName].GetPersistentEventCount() == 0)
+            events[eventName].RemoveNonPersistantListener(action);
+
+            if (events[eventName].NonPersistantListeners == 0)
             {
                 events.Remove(eventName);
             }

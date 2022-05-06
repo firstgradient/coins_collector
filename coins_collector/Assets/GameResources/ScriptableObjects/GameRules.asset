@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09200e641bdab6044a01e08a810d1d90, type: 3}
   m_Name: GameRules
   m_EditorClassIdentifier: 
-  _scoreGoal: 15
+  _scoreGoal: 10
   _maxTime: 15

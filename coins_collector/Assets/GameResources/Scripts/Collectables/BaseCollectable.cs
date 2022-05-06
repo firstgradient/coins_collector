@@ -7,13 +7,13 @@ public abstract class BaseCollectable : MonoBehaviour
         if (collision.gameObject.GetComponent<PlayerController>())
         {
             Collected();
-            Burst();
+            Destroying();
         }
     }
 
     protected abstract void Collected();
 
-    protected virtual void Burst()
+    protected virtual void Destroying()
     {
         Object.Destroy(gameObject);
     }
