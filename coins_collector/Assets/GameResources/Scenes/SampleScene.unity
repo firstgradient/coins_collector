@@ -9903,15 +9903,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1650995484, guid: b7f4dbdabc9ae324ca6a94e999d37c12, type: 3}
       propertyPath: m_Speed
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1650995484, guid: b7f4dbdabc9ae324ca6a94e999d37c12, type: 3}
       propertyPath: m_Acceleration
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1650995484, guid: b7f4dbdabc9ae324ca6a94e999d37c12, type: 3}
-      propertyPath: m_AngularSpeed
-      value: 90
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1650995484, guid: b7f4dbdabc9ae324ca6a94e999d37c12, type: 3}
       propertyPath: m_StoppingDistance

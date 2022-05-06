@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GameRules
   m_EditorClassIdentifier: 
   _scoreGoal: 10
-  _maxTime: 15
+  _maxTime: 30

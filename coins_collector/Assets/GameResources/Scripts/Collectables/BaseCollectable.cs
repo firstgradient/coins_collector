@@ -2,9 +2,9 @@ using UnityEngine;
 
 public abstract class BaseCollectable : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.GetComponent<PlayerController>())
+        if (other.gameObject.GetComponent<PlayerController>())
         {
             Collected();
             Destroying();
