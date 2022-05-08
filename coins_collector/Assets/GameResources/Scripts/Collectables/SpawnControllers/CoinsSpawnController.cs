@@ -10,12 +10,16 @@ public class CoinsSpawnController : MonoBehaviour
 
     private List<Transform> _spawnPoints = new List<Transform>();
 
+    private bool _isActive = true;
+
 
     private void Awake()
     {
+        _isActive = true;
+
         BasicEventManager.StartListening(CoinsEvents.COIN_COLLECTED, OnCoinCollected);
-        BasicEventManager.StartListening(GameLogicEvents.GAME_OVER, OnGameOver);
-        BasicEventManager.StartListening(GameLogicEvents.WIN, OnGameOver);
+        BasicEventManager.StartListening(GameLogicEvents.GAME_OVER, HandleGameOver);
+        BasicEventManager.StartListening(GameLogicEvents.WIN, HandleWin);
 
         foreach (Transform child in SpawnPointsHolder.transform)
         {
@@ -28,9 +32,8 @@ public class CoinsSpawnController : MonoBehaviour
     private void OnDestroy()
     {
         BasicEventManager.StopListening(CoinsEvents.COIN_COLLECTED, OnCoinCollected);
-        BasicEventManager.StopListening(GameLogicEvents.GAME_OVER, OnGameOver);
-        BasicEventManager.StopListening(GameLogicEvents.WIN, OnGameOver);
-
+        BasicEventManager.StopListening(GameLogicEvents.GAME_OVER, HandleGameOver);
+        BasicEventManager.StopListening(GameLogicEvents.WIN, HandleWin);
     }
 
     private void SpawnCoin(bool fullRange)
@@ -38,7 +41,7 @@ public class CoinsSpawnController : MonoBehaviour
         Transform spawnPoint = GetRandomSpawnPoint(fullRange);
         MoveSpawnPointBack(spawnPoint);
 
-        Object.Instantiate(CoinPrefab,spawnPoint);
+        Object.Instantiate(CoinPrefab, spawnPoint);
     }
 
     private Transform GetRandomSpawnPoint(bool fullRange)
@@ -48,7 +51,7 @@ public class CoinsSpawnController : MonoBehaviour
         if (fullRange)
             index = UnityEngine.Random.Range(0, _spawnPoints.Count);
         else
-            index = UnityEngine.Random.Range(0, _spawnPoints.Count-1);
+            index = UnityEngine.Random.Range(0, _spawnPoints.Count - 1);
 
         Transform spawnPoint = _spawnPoints[index];
 
@@ -64,17 +67,20 @@ public class CoinsSpawnController : MonoBehaviour
     #region EventsHandlers
     private void OnCoinCollected(BasicEventArgs eventArgs)
     {
-        SpawnCoin(false);
+        if (_isActive)
+        {
+            SpawnCoin(false);
+        }
     }
 
-    private void OnGameOver(BasicEventArgs eventArgs)
+    private void HandleGameOver(BasicEventArgs eventArgs)
     {
-
+        _isActive = false;
     }
 
-    private void OnWin(BasicEventArgs eventArgs)
+    private void HandleWin(BasicEventArgs eventArgs)
     {
-
+        _isActive = false;
     }
 
     #endregion
