@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using BasicEvents;
 
 public class WinPanelUI : MonoBehaviour
@@ -19,12 +16,6 @@ public class WinPanelUI : MonoBehaviour
     void Start()
     {
         gameObject.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnDestroy()

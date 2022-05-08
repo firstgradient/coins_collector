@@ -13,16 +13,6 @@ public class TimerUI : MonoBehaviour
         BasicEventManager.StartListening(UIEvents.SET_REMAINING_TIME, OnSetRemainingTime);
     }
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     private void OnDestroy()
     {
         BasicEventManager.StopListening(UIEvents.SET_REMAINING_TIME, OnSetRemainingTime);

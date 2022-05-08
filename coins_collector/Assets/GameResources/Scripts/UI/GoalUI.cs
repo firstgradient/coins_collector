@@ -12,16 +12,6 @@ public class GoalUI : MonoBehaviour
         BasicEventManager.StartListening(UIEvents.SET_GOAL, OnSetGoal);
     }
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     private void OnDestroy()
     {
         BasicEventManager.StopListening(UIEvents.SET_GOAL, OnSetGoal);

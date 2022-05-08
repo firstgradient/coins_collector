@@ -17,10 +17,6 @@ public class TimerManager : MonoBehaviour
         BasicEventManager.StartListening(GameLogicEvents.GAME_RULES_SENDED, OnGameRulesSended);
     }
 
-    void Update()
-    {
-    }
-
     private void OnDestroy()
     {
         BasicEventManager.StopListening(TimerEvents.ADD_REMAINING_TIME, OnAddRemainingTime);

@@ -15,16 +15,6 @@ public class ScoreUI : MonoBehaviour
         BasicEventManager.StartListening(UIEvents.SET_CURRENT_SCORE, OnSetCurrentScore);
     }
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     private void OnDestroy()
     {
         BasicEventManager.StopListening(UIEvents.SET_CURRENT_SCORE, OnSetCurrentScore);

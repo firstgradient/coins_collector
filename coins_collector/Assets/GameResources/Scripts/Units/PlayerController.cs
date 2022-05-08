@@ -21,11 +21,6 @@ public class PlayerController : MonoBehaviour
         _isActive = true;
     }
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && _isActive)
@@ -51,12 +46,14 @@ public class PlayerController : MonoBehaviour
     {
         _isActive = false;
         _agent.isStopped= true;
+        _agent.velocity = Vector3.zero;
     }
 
     private void OnWinEvent(BasicEventArgs eventArgs)
     {
         _isActive = false;
         _agent.isStopped = true;
+        _agent.velocity = Vector3.zero;
     }
     #endregion
 
